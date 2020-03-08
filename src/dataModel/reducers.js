@@ -1,10 +1,14 @@
 import {combineReducers} from "redux";
 
-const emptyHomes = {homes: []};
-const homes = (state = emptyHomes, action) => {
+let state = {
+    userID: "NOT_LOGGED_IN",
+    homes: [null],
+    works: [null],
+};
+const homes = (state = state, action) => {
     switch (action.type) {
         case 'ADD_HOME':
-            return {
+            return { ...state,
                 homes: homes.push(
                     {
                         homeID: action.data.homeID,
@@ -19,16 +23,18 @@ const homes = (state = emptyHomes, action) => {
                     };
         case 'ADD_ALL_HOMES' :
         {
-            return {homes :action.data.homes};
+            console.log("hi from reducer");
+            console.log(action.data);
+            return {...state, homes : action.data};
         }
         case 'DELETE_HOME' :
-            return null; //TODO implement deletion reducer
+            return state; //TODO implement deletion reducer
         default :
             return state;
     }
 };
-const emptyWorks = {works: []};
-const works = (state = emptyWorks, action) => {
+
+const works = (state= state , action) => {
     switch (action) {
         case 'ADD_WORK':
             return {
@@ -49,7 +55,7 @@ const works = (state = emptyWorks, action) => {
     }
 };
 const initialUserState = { userID : "NOT_LOGGED_IN"};
-const userID = (state = initialUserState, action ) => {
+const userID = (state= state, action ) => {
     switch (action) {
         case  "LOGGED_IN" : {
             return { userID : action.userID};

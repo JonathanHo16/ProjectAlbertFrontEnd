@@ -29,7 +29,7 @@ import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js"
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
-import mapStateToProps from "react-redux/lib/connect/mapStateToProps";
+//import mapStateToProps from "react-redux/lib/connect/mapStateToProps";
 import {addAllHomes, addHome} from "../../dataModel/actions";
 
 const useStyles = makeStyles(styles);
@@ -77,6 +77,8 @@ class Dashboard extends React.PureComponent {
   getCityList() {
     let cities = [];
     const {homes} = this.state.homes;
+    console.log("here is the city list view");
+    console.log(this.state);
 
     const handleUniqueCities = (newCity, index) =>{
       if (!cities.includes(newCity)) {
@@ -112,8 +114,9 @@ class Dashboard extends React.PureComponent {
         </div>)
     }
 }
-const  myMapStateToProps = (state) => ({
+const  mapStateToProps = (state) => ({
   ...state
+
 });
-export default connect(myMapStateToProps)(Dashboard)
+export default connect(mapStateToProps)(Dashboard)
 // }
